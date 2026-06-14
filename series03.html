@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>领导否定型PUA反制指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:#f3f0eb;font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;overscroll-behavior:none;}
+  .card-wrap{width:100%;max-width:500px;position:relative;margin:0 auto;}
+  .card{width:100%;aspect-ratio:3/4;background:#fcf9f5;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 20px rgba(0,0,0,0.06);}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#cc785c,#e8a87c,#cc785c);z-index:2;}
+  .card-inner{padding:5% 6% 4%;flex:1;display:flex;flex-direction:column;position:relative;overflow-y:auto;}
+  .card-inner::-webkit-scrollbar{display:none;}
+  .card-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(0.55rem,1.2vw,0.7rem);letter-spacing:0.08em;color:#cc785c;margin-bottom:clamp(6px,1.5vw,12px);display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .card-num::after{content:'';flex:1;max-width:40px;height:2px;background:#cc785c;opacity:0.4;}
+  .t-main{font-weight:900;font-size:clamp(1.5rem,5.2vw,2.6rem);line-height:1.25;color:#1a1a2e;letter-spacing:-0.02em;margin-bottom:clamp(4px,1vw,10px);flex-shrink:0;}
+  .hl{color:#cc785c;}
+  .t-sub{font-weight:400;font-size:clamp(0.8rem,2.3vw,1.1rem);line-height:1.5;color:#6b5b55;margin-bottom:clamp(8px,2vw,18px);flex-shrink:0;}
+  .divider{width:clamp(28px,6vw,40px);height:3px;background:#cc785c;margin-bottom:clamp(10px,2.5vw,20px);border-radius:2px;flex-shrink:0;}
+  .body{font-weight:400;font-size:clamp(0.75rem,2.1vw,0.95rem);line-height:1.7;color:#3d3530;letter-spacing:0.01em;flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(4px,1vw,8px);}
+  .body strong{font-weight:700;color:#1a1a2e;}
+  .body .em{color:#cc785c;font-weight:700;}
+  .body .wn{color:#c0392b;font-weight:700;}
+  .body p{margin:0;}
+  .hbox{background:linear-gradient(135deg,#fdf6f0,#f8ede6);border-left:3px solid #cc785c;padding:clamp(8px,2vw,14px) clamp(10px,2.5vw,18px);margin:clamp(4px,1vw,8px) 0;border-radius:0 6px 6px 0;flex-shrink:0;}
+  .hbox p{margin:0;}
+  .hbox-rd{background:#fef0ed;border-left-color:#c0392b;}
+  .hbox-gr{background:#f0f7e8;border-left-color:#2d7d3a;}
+  .hbox-dk{background:#1a1a2e;border-left-color:#cc785c;}
+  .hbox-dk p{color:#fcf9f5;}
+  .tag-item{display:inline-block;background:#f5ede8;color:#6b5b55;padding:clamp(3px,0.8vw,6px) clamp(8px,2vw,14px);border-radius:14px;font-size:clamp(0.55rem,1.4vw,0.7rem);font-weight:500;}
+  .spacer{flex:1;min-height:4px;}
+  .btm{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.45rem,1.1vw,0.6rem);letter-spacing:0.1em;color:#b8a89e;margin-top:clamp(4px,1vw,8px);flex-shrink:0;}
+  .blist{list-style:none;padding:0;margin:clamp(4px,1vw,8px) 0;flex-shrink:0;}
+  .blist li{padding:clamp(3px,0.8vw,6px) 0 clamp(3px,0.8vw,6px) clamp(18px,4vw,24px);position:relative;line-height:1.55;font-size:clamp(0.68rem,1.9vw,0.85rem);}
+  .blist li::before{content:'';position:absolute;left:clamp(2px,0.5vw,4px);top:clamp(12px,2.5vw,16px);width:7px;height:7px;border-radius:50%;background:#cc785c;opacity:0.3;}
+  .blist li.grn::before{background:#2d7d3a;opacity:0.5;}
+
+  .cv{background:linear-gradient(145deg,#1a1a2e 0%,#2d2040 100%);}
+  .cv .card-inner{justify-content:center;align-items:center;text-align:center;}
+  .cv .t-main{color:#fcf9f5;font-size:clamp(1.7rem,6.2vw,3rem);}
+  .cv .t-main .hl{color:#e8a87c;}
+  .cv .t-sub{color:#b8a89e;}
+  .cv .divider{margin:clamp(8px,2vw,16px) auto;}
+  .cv .warn-badge{display:inline-block;background:rgba(204,120,92,0.15);border:1px solid rgba(204,120,92,0.3);color:#e8a87c;padding:clamp(5px,1.2vw,10px) clamp(14px,4vw,28px);border-radius:20px;font-size:clamp(0.7rem,1.8vw,0.9rem);font-weight:500;margin-top:clamp(6px,1.5vw,12px);}
+  .cv .card-num{color:#e8a87c;justify-content:center;}
+  .cv .card-num .dsh{opacity:0.5;color:#b8a89e;}
+  .cv .btm{text-align:center;color:#b8a89e;}
+
+  .pg{position:fixed;bottom:clamp(10px,3vw,24px);left:50%;transform:translateX(-50%);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:clamp(0.55rem,1.5vw,0.7rem);color:rgba(107,91,85,0.5);background:rgba(243,240,235,0.7);backdrop-filter:blur(4px);padding:clamp(3px,0.6vw,5px) clamp(10px,2.5vw,20px);border-radius:12px;z-index:10;pointer-events:none;user-select:none;}
+  .touch-zones{position:absolute;top:0;left:0;right:0;bottom:0;z-index:5;display:flex;pointer-events:none;}
+  .tz-left,.tz-right{flex:1;pointer-events:auto;cursor:pointer;}
+  .tz-left:active{background:linear-gradient(90deg,rgba(0,0,0,0.03),transparent);}
+  .tz-right:active{background:linear-gradient(270deg,rgba(0,0,0,0.03),transparent);}
+
+  .mini-bar{position:fixed;bottom:clamp(36px,9vw,54px);left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:clamp(10px,2.5vw,16px);background:rgba(26,26,46,0.65);backdrop-filter:blur(8px);padding:clamp(4px,1vw,8px) clamp(10px,2.5vw,16px);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);opacity:0;transition:opacity 0.3s;pointer-events:none;}
+  .mini-bar.show{opacity:1;pointer-events:auto;}
+  .mini-bar button{background:none;border:none;color:#fcf9f5;font-size:clamp(0.65rem,1.7vw,0.8rem);cursor:pointer;padding:clamp(2px,0.5vw,4px) clamp(6px,1.5vw,10px);border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;transition:background 0.2s;white-space:nowrap;}
+  .mini-bar button:hover{background:rgba(204,120,92,0.3);}
+  .mini-bar .pi{color:rgba(255,255,255,0.5);font-size:clamp(0.5rem,1.3vw,0.65rem);font-weight:600;min-width:30px;text-align:center;user-select:none;}
+  .mini-bar .dl{background:#cc785c;color:#fff;border-radius:12px;font-size:clamp(0.5rem,1.3vw,0.6rem);padding:clamp(2px,0.5vw,5px) clamp(6px,1.5vw,12px);}
+  @media (hover:none){.mini-bar{opacity:1;pointer-events:auto;}}
+</style>
+</head>
+<body>
+
+<div class="card-wrap" id="app">
+
+<!-- 卡1：封面 -->
+<div class="card cv" data-i="0">
+  <div class="card-inner">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+      <div class="card-num"><span class="dsh">——</span> SERIES 03 <span class="dsh">——</span></div>
+      <div class="t-main">你做的不是不行<br><span class="hl">是他在否定你</span></div>
+      <div class="divider"></div>
+      <div class="t-sub">领导否定型PUA · 心理拆解 · 课题分离</div>
+      <div class="warn-badge">⚠️ 他的否定是他的课题，不是你的能力问题</div>
+    </div>
+    <div class="btm">职场反PUA · 第三期</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡2：开篇 -->
+<div class="card" data-i="1" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">01 · 开篇</div>
+    <div class="t-main">你不是不行<br><span class="hl">你只是遇到了一个一直说你不行的人</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>「这个方案还差得远。」</p>
+      <p>你改了一版，他说方向不对。<br>你再改一版，他说还不如第一版。<br>你问他哪里不行，他说「你自己想」。</p>
+      <p>然后你开始怀疑自己：是不是我真的不行？</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">停。先问自己一个问题：说你不行的那个人，他自己行吗？</p></div>
+    </div>
+    <div class="btm">01 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡3：心理动机（上） -->
+<div class="card" data-i="2" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">02 · 心理动机</div>
+    <div class="t-main">他为什么总否定你？<br><span class="hl">不是为你成长</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;font-size:clamp(0.72rem,2vw,0.9rem);">动机一：建立权力差</p>
+      <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#6b5b55;">当一个人无法靠专业能力赢得尊重时，他就靠贬低你来获得优越感。「你不行」的潜台词是「我比你行」。</p>
+      <p style="font-weight:700;font-size:clamp(0.72rem,2vw,0.9rem);margin-top:4px;">动机二：让你更依赖他</p>
+      <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#6b5b55;">持续否定→你自我怀疑→不敢做决定→什么都问他。他要的就是这个效果。</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 他不是在培养你，他是在驯化你。</p></div>
+    </div>
+    <div class="btm">02 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡4：心理动机（下） -->
+<div class="card" data-i="3" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">03 · 更隐蔽的动机</div>
+    <div class="t-main">两个更隐蔽的<span class="hl">真相</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;font-size:clamp(0.72rem,2vw,0.9rem);">动机三：掩盖自己没有方向</p>
+      <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#6b5b55;">他自己没想清楚，但不敢承认。只能用「我觉得还差点意思」来保平安。</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 他的否定不是你的方案有问题，是他给不出确定答案。</p></div>
+      <p style="font-weight:700;font-size:clamp(0.72rem,2vw,0.9rem);margin-top:4px;">动机四：制造焦虑刷存在感</p>
+      <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#6b5b55;">「最近团队产出我很不满意」——具体哪里不满意？不说。焦虑的人更听话。</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 有些否定不是你的问题，是他需要你焦虑。</p></div>
+    </div>
+    <div class="btm">03 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡5：课题分离 -->
+<div class="card" data-i="4" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">04 · 课题分离</div>
+    <div class="t-main">他的否定是他的课题<br><span class="hl">你的成长是你的</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>当你再听到否定时，在脑子里做一次翻译：</p>
+      <p style="font-size:clamp(0.65rem,1.7vw,0.82rem);">「这个方案不行」→ <strong class="grn" style="color:#2d7d3a;">他给不出具体反馈</strong></p>
+      <p style="font-size:clamp(0.65rem,1.7vw,0.82rem);">「你自己没觉得有问题？」→ <strong class="grn" style="color:#2d7d3a;">他不想直接说问题在哪</strong></p>
+      <p style="font-size:clamp(0.65rem,1.7vw,0.82rem);">「还差得远」→ <strong class="grn" style="color:#2d7d3a;">他没有明确标准</strong></p>
+      <div class="hbox" style="margin-top:4px;"><p style="font-weight:700;">翻译完了，事情就清楚了——他的否定不是关于你的方案，是关于他的情绪、他的无能、他的管理方式。</p></div>
+      <p><strong>你不需要为他的情绪负责。你只需要为你的方案负责。</strong></p>
+    </div>
+    <div class="btm">04 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡6：策略一+二 -->
+<div class="card" data-i="5" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">05 · 策略</div>
+    <div class="t-main">对齐目标 · <span class="hl">重新执行</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;">① 对齐目标：把模糊否定变具体标准</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">「好的，您觉得不行具体指哪个方面？方向、数据还是呈现方式？我按标准调整。」</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">如果他说「自己想」：「为了减少返工，请给我一个参考方向或标杆案例。」</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">你不是在顶撞他——你是在帮他履行领导最基本的职责：<strong>给方向。</strong></p>
+      <p style="font-weight:700;margin-top:4px;">② 重新执行：翻篇，按标准推进</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">从「他在否定我」切换到「我在按标准执行」——你从一个受害者变回执行者。</p>
+      <div class="hbox"><p style="font-weight:700;">往前走，否定就追不上你了。</p></div>
+    </div>
+    <div class="btm">05 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡7：策略三 -->
+<div class="card" data-i="6" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">06 · 策略</div>
+    <div class="t-main">软性反制<span class="hl">给他一个信号</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;">① 延迟情绪反应</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">他否定你时，平静地看他两秒：「好的，调整完再发一版。」</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">你的平静就是他最怕的东西。</p>
+      <p style="font-weight:700;margin-top:4px;">② 用事实代替感受</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">「根据之前对齐的A方向我做的这个版本，您说的B方向我没收到，是方向有调整吗？」</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">不带情绪的陈述，比辩解有力量。</p>
+      <p style="font-weight:700;margin-top:4px;">③ 温和地确认（1对1场合）</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">「在您看来，我需要提升哪方面才能更好配合您的工作？」</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">让他意识到：你在记录他是否给出了有价值的指导。</p>
+      <div class="hbox"><p style="font-weight:700;">一个习惯PUA的领导，最怕下属平静且专业。</p></div>
+    </div>
+    <div class="btm">06 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡8：结尾 -->
+<div class="card" data-i="7" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">07 · 结尾</div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="hbox hbox-dk" style="padding:clamp(16px,4vw,32px);">
+        <p style="font-weight:700;color:#fcf9f5;line-height:1.5;text-align:center;margin-bottom:6px;font-size:clamp(0.95rem,3vw,1.4rem);">不是所有的反馈都值得接受。</p>
+        <p style="font-weight:700;color:#e8a87c;line-height:1.5;text-align:center;font-size:clamp(0.95rem,3vw,1.4rem);">只有能帮你把事做好的，才叫反馈。<br>剩下的，叫噪音。</p>
+      </div>
+      <div class="body" style="margin-top:8px;">
+        <p>被否定时问自己三个问题：<br>
+        ① 他说的对改进工作有没有帮助？<br>
+        ② 他能说出具体问题还是只会泛泛否定？<br>
+        ③ 是他的管理风格，还是我真的需要提升？</p>
+        <p style="margin-top:clamp(6px,1.5vw,12px);"><strong>最危险的不是被否定，是你把他的否定变成了你对自己的看法。</strong></p>
+        <p style="font-weight:700;margin-top:clamp(6px,1.5vw,12px);">
+          <span class="hl">他不认可你，不代表你不好。</span><br>
+          <span class="hl">他否定你，不代表你做错了。</span>
+        </p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:clamp(4px,1vw,8px);flex-shrink:0;">
+      <span class="tag-item">#职场PUA</span>
+      <span class="tag-item">#课题分离</span>
+      <span class="tag-item">#领导PUA</span>
+      <span class="tag-item">#职场清醒</span>
+      <span class="tag-item">#反PUA</span>
+      <span class="tag-item">#打工人</span>
+      <span class="tag-item">#边界感</span>
+      <span class="tag-item">#自信养成</span>
+    </div>
+    <div class="btm">07 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<div class="pg" id="pg">1 / 8</div>
+<div class="mini-bar" id="miniBar">
+  <button onclick="prevC()">‹</button>
+  <span class="pi" id="pi">1/8</span>
+  <button onclick="nextC()">›</button>
+  <button class="dl" onclick="capC()">截图</button>
+</div>
+
+</div>
+
+<script>
+  let cur=0,tot=8,hideTimer=null;
+  function showC(i){
+    document.querySelectorAll('.card').forEach((c,idx)=>{c.style.display=idx===i?'flex':'none';});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+tot;
+    document.getElementById('pi').textContent=(i+1)+'/'+tot;
+    showBar();
+  }
+  function nextC(){if(cur<tot-1)showC(cur+1);}
+  function prevC(){if(cur>0)showC(cur-1);}
+  function showBar(){const bar=document.getElementById('miniBar');bar.classList.add('show');clearTimeout(hideTimer);hideTimer=setTimeout(()=>bar.classList.remove('show'),3000);}
+  function capC(){
+    const card=document.querySelectorAll('.card')[cur];const clone=card.cloneNode(true);
+    const zones=clone.querySelector('.touch-zones');if(zones)zones.remove();
+    const w=window.open('','','');w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">');
+    w.document.write('<style>');w.document.write(document.querySelector('style').innerHTML);
+    w.document.write('body{margin:0;background:#f3f0eb;display:flex;justify-content:center;align-items:center;min-height:100vh;}');
+    w.document.write('.card{width:100%;max-width:500px;aspect-ratio:3/4;box-shadow:none;border-radius:0;}');
+    w.document.write('.mini-bar,.pg,.touch-zones{display:none!important;}');
+    w.document.write('</style></head><body>');w.document.write(clone.outerHTML);w.document.write('</body></html>');
+    w.document.close();w.focus();setTimeout(()=>{w.print();},300);
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextC();if(e.key==='ArrowLeft')prevC();});
+  let sx=0;
+  document.querySelector('.card-wrap').addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+  document.querySelector('.card-wrap').addEventListener('touchend',e=>{const ex=e.changedTouches[0].clientX;const dx=ex-sx;if(dx>50)prevC();else if(dx<-50)nextC();});
+  document.querySelector('.card-wrap').addEventListener('click',showBar);
+</script>
+</body>
+</html>
