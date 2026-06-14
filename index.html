@@ -1,37 +1,638 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skill Showcase - WorkBuddy</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: #0f172a; color: #e2e8f0; min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .container { max-width: 600px; width: 90%; text-align: center; padding: 3rem 0; }
-        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: #94a3b8; margin-bottom: 3rem; font-size: 1.1rem; }
-        .card {
-            background: #1e293b; border: 1px solid #334155; border-radius: 16px;
-            padding: 2rem; margin-bottom: 1.5rem; transition: all 0.3s;
-            text-decoration: none; color: inherit; display: block;
-        }
-        .card:hover { border-color: #60a5fa; transform: translateY(-4px); box-shadow: 0 8px 30px rgba(96,165,250,0.15); }
-        .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-        .card-title { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .card-desc { color: #94a3b8; font-size: 0.95rem; }
-        .footer { margin-top: 3rem; color: #475569; font-size: 0.85rem; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>职场反PUA · 清醒指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+
+  body{
+    background:#f3f0eb;
+    font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overscroll-behavior:none;
+  }
+
+  /* 卡片容器 - 满屏宽度 */
+  .card-wrap{
+    width:100%;
+    max-width:500px;
+    position:relative;
+    margin:0 auto;
+  }
+
+  .card{
+    width:100%;
+    aspect-ratio:3/4;
+    background:#fcf9f5;
+    position:relative;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 1px 20px rgba(0,0,0,0.06);
+  }
+
+  /* 顶部装饰条 */
+  .card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:4px;
+    background:linear-gradient(90deg,#cc785c,#e8a87c,#cc785c);
+    z-index:2;
+  }
+
+  .card-inner{
+    padding:5% 6% 4%;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    position:relative;
+    overflow-y:auto;
+  }
+  .card-inner::-webkit-scrollbar{display:none;}
+
+  /* 编号标签 */
+  .card-num{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;
+    font-size:clamp(0.55rem,1.2vw,0.7rem);
+    letter-spacing:0.08em;
+    color:#cc785c;
+    margin-bottom:clamp(6px,1.5vw,12px);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-shrink:0;
+  }
+  .card-num::after{
+    content:'';
+    flex:1;
+    max-width:40px;
+    height:2px;
+    background:#cc785c;
+    opacity:0.4;
+  }
+
+  /* 标题 */
+  .t-main{
+    font-weight:900;
+    font-size:clamp(1.6rem,5.5vw,2.8rem);
+    line-height:1.25;
+    color:#1a1a2e;
+    letter-spacing:-0.02em;
+    margin-bottom:clamp(4px,1vw,10px);
+    flex-shrink:0;
+  }
+  .hl{color:#cc785c;}
+  .hl-dk{color:#b55a3a;}
+
+  .t-sub{
+    font-weight:400;
+    font-size:clamp(0.85rem,2.5vw,1.2rem);
+    line-height:1.5;
+    color:#6b5b55;
+    margin-bottom:clamp(8px,2vw,18px);
+    flex-shrink:0;
+  }
+
+  .divider{
+    width:clamp(28px,6vw,40px);
+    height:3px;
+    background:#cc785c;
+    margin-bottom:clamp(10px,2.5vw,20px);
+    border-radius:2px;
+    flex-shrink:0;
+  }
+
+  /* 正文 */
+  .body{
+    font-weight:400;
+    font-size:clamp(0.78rem,2.2vw,1rem);
+    line-height:1.75;
+    color:#3d3530;
+    letter-spacing:0.01em;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    gap:clamp(4px,1vw,10px);
+  }
+  .body strong{font-weight:700;color:#1a1a2e;}
+  .body .em{color:#cc785c;font-weight:700;}
+  .body .wn{color:#c0392b;font-weight:700;}
+  .body p{margin:0;}
+
+  .hbox{
+    background:linear-gradient(135deg,#fdf6f0,#f8ede6);
+    border-left:3px solid #cc785c;
+    padding:clamp(8px,2vw,14px) clamp(10px,2.5vw,18px);
+    margin:clamp(4px,1vw,10px) 0;
+    border-radius:0 6px 6px 0;
+    flex-shrink:0;
+  }
+  .hbox p{margin:0;}
+
+  /* 对比行 */
+  .cmp{
+    display:flex;gap:0;margin:clamp(4px,1vw,8px) 0;
+    border-radius:6px;overflow:hidden;flex-shrink:0;
+  }
+  .cmp-l{
+    flex:1;background:#fef0ed;padding:clamp(6px,1.5vw,12px) clamp(8px,2vw,14px);
+    color:#c0392b;font-weight:500;font-size:clamp(0.7rem,2vw,0.85rem);
+  }
+  .cmp-r{
+    flex:1;background:#f0f7e8;padding:clamp(6px,1.5vw,12px) clamp(8px,2vw,14px);
+    color:#2d7d3a;font-weight:500;font-size:clamp(0.7rem,2vw,0.85rem);
+  }
+
+  /* 列表 */
+  .blist{list-style:none;padding:0;margin:clamp(4px,1vw,8px) 0;flex-shrink:0;}
+  .blist li{
+    padding:clamp(3px,0.8vw,6px) 0 clamp(3px,0.8vw,6px) clamp(18px,4vw,24px);
+    position:relative;line-height:1.55;
+    font-size:clamp(0.72rem,2vw,0.9rem);
+  }
+  .blist li::before{
+    content:'';position:absolute;
+    left:clamp(2px,0.5vw,4px);top:clamp(12px,2.5vw,16px);
+    width:7px;height:7px;border-radius:50%;
+    background:#cc785c;opacity:0.3;
+  }
+  .blist li.dg::before{background:#c0392b;opacity:0.5;}
+
+  /* 四象限 */
+  .quad{
+    display:grid;grid-template-columns:1fr 1fr;gap:0;
+    border:2px solid #e8ddd5;border-radius:8px;overflow:hidden;
+    margin:clamp(6px,1.5vw,12px) 0;flex-shrink:0;
+  }
+  .qi{
+    padding:clamp(8px,2vw,16px);text-align:center;
+    font-size:clamp(0.68rem,1.8vw,0.85rem);line-height:1.4;
+  }
+  .qi .ql{font-weight:700;font-size:clamp(0.75rem,2vw,0.95rem);margin-bottom:2px;}
+  .qi .qs{font-size:clamp(0.6rem,1.5vw,0.75rem);color:#8a7a72;}
+  .qi:nth-child(1){background:#f5ede8;border-right:1px solid #e8ddd5;border-bottom:1px solid #e8ddd5;}
+  .qi:nth-child(1) .ql{color:#b55a3a;}
+  .qi:nth-child(2){background:#f0f7e8;border-bottom:1px solid #e8ddd5;}
+  .qi:nth-child(2) .ql{color:#2d7d3a;}
+  .qi:nth-child(3){background:#fef0ed;border-right:1px solid #e8ddd5;}
+  .qi:nth-child(3) .ql{color:#c0392b;}
+  .qi:nth-child(4){background:#f8f0ea;}
+  .qi:nth-child(4) .ql{color:#8a7a72;}
+
+  .tag-item{
+    display:inline-block;background:#f5ede8;
+    color:#6b5b55;padding:clamp(3px,0.8vw,6px) clamp(8px,2vw,14px);
+    border-radius:14px;font-size:clamp(0.6rem,1.5vw,0.75rem);font-weight:500;
+  }
+
+  .spacer{flex:1;min-height:4px;}
+
+  /* 封面特殊 */
+  .cv{
+    background:linear-gradient(145deg,#1a1a2e 0%,#2d2040 100%);
+  }
+  .cv .card-inner{justify-content:center;align-items:center;text-align:center;}
+  .cv .t-main{color:#fcf9f5;font-size:clamp(1.8rem,6.5vw,3.2rem);}
+  .cv .t-main .hl{color:#e8a87c;}
+  .cv .t-sub{color:#b8a89e;}
+  .cv .divider{margin:clamp(8px,2vw,16px) auto;}
+  .cv .warn-badge{
+    display:inline-block;background:rgba(204,120,92,0.15);
+    border:1px solid rgba(204,120,92,0.3);color:#e8a87c;
+    padding:clamp(5px,1.2vw,10px) clamp(14px,4vw,28px);
+    border-radius:20px;font-size:clamp(0.75rem,2vw,1rem);
+    font-weight:500;margin-top:clamp(6px,1.5vw,12px);
+  }
+  .cv .card-num{color:#e8a87c;justify-content:center;}
+  .cv .card-num .dsh{opacity:0.5;color:#b8a89e;}
+  .cv .btm{text-align:center;}
+
+  /* 结尾特殊 */
+  .ed .t-main{font-size:clamp(1.3rem,4vw,2rem);}
+
+  /* 页码指示器 - 极小，悬浮 */
+  .pg{
+    position:fixed;
+    bottom:clamp(10px,3vw,24px);
+    left:50%;transform:translateX(-50%);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:600;
+    font-size:clamp(0.6rem,1.6vw,0.75rem);
+    color:rgba(107,91,85,0.5);
+    background:rgba(243,240,235,0.7);
+    backdrop-filter:blur(4px);
+    padding:clamp(3px,0.6vw,5px) clamp(10px,2.5vw,20px);
+    border-radius:12px;
+    z-index:10;
+    pointer-events:none;
+    user-select:none;
+    transition:opacity 0.5s;
+  }
+
+  /* 触控区域 - 左右半屏翻页 */
+  .touch-zones{
+    position:absolute;
+    top:0;left:0;right:0;bottom:0;
+    z-index:5;
+    display:flex;
+    pointer-events:none;
+  }
+  .tz-left,.tz-right{
+    flex:1;
+    pointer-events:auto;
+    cursor:pointer;
+  }
+  /* 轻触提示箭头 - 极小，仅在页面加载时显示一会 */
+  .tz-left::after,.tz-right::after{
+    content:'';
+    position:absolute;
+    top:50%;transform:translateY(-50%);
+    width:0;height:0;
+    border-style:solid;
+    opacity:0;
+    transition:opacity 0.3s;
+  }
+  .tz-left::after{
+    left:clamp(6px,1.5vw,12px);
+    border-width:8px 10px 8px 0;
+    border-color:transparent rgba(0,0,0,0.08) transparent transparent;
+  }
+  .tz-right::after{
+    right:clamp(6px,1.5vw,12px);
+    border-width:8px 0 8px 10px;
+    border-color:transparent transparent transparent rgba(0,0,0,0.08);
+  }
+  /* 点击反馈 */
+  .tz-left:active{background:linear-gradient(90deg,rgba(0,0,0,0.03),transparent);}
+  .tz-right:active{background:linear-gradient(270deg,rgba(0,0,0,0.03),transparent);}
+
+  /* 缩小版底部操作条 */
+  .mini-bar{
+    position:fixed;
+    bottom:clamp(40px,10vw,60px);
+    left:50%;transform:translateX(-50%);
+    z-index:20;
+    display:flex;
+    align-items:center;
+    gap:clamp(12px,3vw,20px);
+    background:rgba(26,26,46,0.65);
+    backdrop-filter:blur(8px);
+    padding:clamp(4px,1vw,8px) clamp(10px,2.5vw,16px);
+    border-radius:20px;
+    box-shadow:0 2px 12px rgba(0,0,0,0.1);
+    opacity:0;
+    transition:opacity 0.3s;
+    pointer-events:none;
+  }
+  .mini-bar.show{
+    opacity:1;
+    pointer-events:auto;
+  }
+  .mini-bar button{
+    background:none;border:none;color:#fcf9f5;
+    font-size:clamp(0.7rem,1.8vw,0.85rem);
+    cursor:pointer;padding:clamp(2px,0.5vw,4px) clamp(6px,1.5vw,10px);
+    border-radius:12px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:600;
+    transition:background 0.2s;
+    white-space:nowrap;
+  }
+  .mini-bar button:hover{background:rgba(204,120,92,0.3);}
+  .mini-bar .pi{
+    color:rgba(255,255,255,0.5);
+    font-size:clamp(0.55rem,1.4vw,0.7rem);
+    font-weight:600;
+    min-width:36px;
+    text-align:center;
+    user-select:none;
+  }
+  .mini-bar .dl{
+    background:#cc785c;color:#fff;
+    border-radius:12px;
+    font-size:clamp(0.55rem,1.4vw,0.65rem);
+    padding:clamp(2px,0.5vw,5px) clamp(6px,1.5vw,12px);
+  }
+
+  /* 底部bar自动隐藏，点击卡片重新显示 */
+  .hide-bar .mini-bar{opacity:0;pointer-events:none;}
+
+  @media (hover:none){
+    /* 触屏设备默认显示操作条 */
+    .mini-bar{opacity:1;pointer-events:auto;}
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Skill Showcase</h1>
-        <p class="subtitle">WorkBuddy 技能展示页面</p>
-        
-        <p class="footer">Powered by WorkBuddy AI 🐾</p>
+
+<div class="card-wrap" id="app">
+
+  <!-- 卡片1：封面 -->
+  <div class="card cv" data-i="0">
+    <div class="card-inner">
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+        <div class="card-num"><span class="dsh">——</span> SERIES 01 <span class="dsh">——</span></div>
+        <div class="t-main">他不是在示弱<br><span class="hl">他是在驯化你</span></div>
+        <div class="divider"></div>
+        <div class="t-sub">职场女性反情绪勒索 · 清醒指南</div>
+        <div class="warn-badge">⚠️ 别做男人的免费情绪垃圾桶</div>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:auto;flex-shrink:0;">职场反PUA · 第一期</div>
     </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片2：开篇 -->
+  <div class="card" data-i="1" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">01 · 开篇</div>
+      <div class="t-main">你有没有这种<span class="hl">经历</span></div>
+      <div class="divider"></div>
+      <div class="body">
+        <p>加班到深夜，他发条语音：<br>「唉，最近真的好累……没人理解我。」</p>
+        <p>你心软了，回了一大段安慰。<br>他说：「<strong>还是你懂我。</strong>」</p>
+        <p>然后你开始在意他的情绪。<br>他今天心情好不好？是不是又被领导压了？我是不是说错话了？</p>
+        <div class="hbox"><p style="font-weight:700;color:#c0392b;">⚠️ 停。</p></div>
+        <p>你花那么多时间去消化一个成年男人的情绪。<br>而你的工作、你的项目、你的晋升——悄悄往后挪了。</p>
+        <p><strong class="wn">这不是关心，这是你没有觉察地被绑架了。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">01 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片3：假性示弱 -->
+  <div class="card" data-i="2" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">02 · 套路一</div>
+      <div class="t-main">「<span class="hl">我好可怜</span>」<br>是他的武器，不是他的真相</div>
+      <div class="divider"></div>
+      <div class="body">
+        <p>你在深夜帮他分析领导、拆解项目、给出建议……</p>
+        <p>第二天他该干嘛干嘛，问题一个没解决。</p>
+        <p>但下次有情绪了，他第一个来找你。<br><strong>因为你——好用。</strong></p>
+        <div class="cmp">
+          <div class="cmp-l">❌ 假示弱<br>只诉苦，不解决，反复同个问题</div>
+          <div class="cmp-r">✅ 真求助<br>会问具体方法，会行动</div>
+        </div>
+        <p><strong class="wn">🛑 他不是需要你，他只是找到了一个免费的、随叫随到的情绪垃圾桶。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">02 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片4：忽冷忽热 -->
+  <div class="card" data-i="3" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">03 · 套路二</div>
+      <div class="t-main">忽冷忽热<br><span class="hl">你在被训练</span></div>
+      <div class="divider"></div>
+      <div class="body">
+        <p>今天热情似火：主动找你吃饭、帮你挡枪、夸你能力强。</p>
+        <p>明天冷若冰霜：消息不回、见面敷衍、像什么都没发生过。</p>
+        <p>你开始焦虑——<br>是不是我又说错话了？他是不是生我气了？</p>
+        <div class="hbox"><p style="font-weight:700;">这叫「<strong class="em">间歇性强化</strong>」——不可预测的奖励让你上瘾。你在追逐他偶尔给你的那点温度。</p></div>
+        <p><strong class="wn">‼️ 他在测试能不能不用付出任何成本，就让你持续投入关注。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">03 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片5：母性拯救 -->
+  <div class="card" data-i="4" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">04 · 套路三</div>
+      <div class="t-main">你不是救世主<br><span class="hl">你是被消耗品</span></div>
+      <div class="divider"></div>
+      <div class="body">
+        <p>他精准地在你面前展示无助——</p>
+        <p>「如果连我都不帮他，这个世界就真的没人对他好了。」</p>
+        <p>你启动了母性模式：<br>想帮他、安慰他、鼓励他、激发他的斗志……</p>
+        <p>甚至幻想——我帮他走出低谷，他一定会感激我、对我好。</p>
+        <div class="hbox"><p style="font-weight:700;">🚫 男人的拯救幻想 = 当王子<br>🚫 女人的拯救幻想 = 当妈</p></div>
+        <p><strong class="wn">🛑 他不是需要被拯救的人，他只是找到了一个免费的情绪劳动力。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">04 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片6：深度心理拆解 -->
+  <div class="card" data-i="5" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">05 · 深度拆解</div>
+      <div class="t-main">他<span class="hl">为什么</span>会这样？</div>
+      <div class="divider"></div>
+      <div class="body">
+        <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#8a7a72;">五个底层心理原因，看懂他的真实目的</p>
+        <ul class="blist">
+          <li><strong>① 情绪外包</strong><br><span style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">他把妈妈的功能移植到你身上</span></li>
+          <li><strong>② 低成本维持高位</strong><br><span style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">诉苦是投入产出比最高的策略——不是恶，是精明</span></li>
+          <li><strong>③ 安全感补给</strong><br><span style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">你是充电站，用完拔了就走</span></li>
+          <li class="dg"><strong>④ 隐性权力博弈</strong><br><span style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">你的情绪波动 = 他的掌控感</span></li>
+          <li><strong>⑤ 需要观众，不是搭档</strong><br><span style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">他要的只是有人证明他重要</span></li>
+        </ul>
+        <div class="hbox" style="margin-top:4px;"><p style="font-weight:700;">💡 这笔账，怎么算都是亏的。</p></div>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">05 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片7：主体性觉醒 -->
+  <div class="card" data-i="6" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">06 · 核心</div>
+      <div class="t-main">把镜头从「<span style="color:#b8a89e;">他</span>」<br>转向「<span class="hl">你</span>」</div>
+      <div class="divider"></div>
+      <div class="body">
+        <p>三个套路之所以成立，是因为你一直在搞错目标。</p>
+        <div class="hbox" style="background:#fef0ed;border-left-color:#c0392b;"><p style="font-weight:700;">❌ 你的目标：「改善他对你的态度和关系」</p></div>
+        <div class="hbox" style="background:#f0f7e8;border-left-color:#2d7d3a;"><p style="font-weight:700;">✅ 你的目标应该是：「搞清楚他对你的事业有什么用」</p></div>
+        <p>当你把镜头从「他」转向「你」——焦虑瞬间消失。</p>
+        <p><strong>你不是被动的情绪被牵引者，<br>你是主动的<strong class="em">关系管理者</strong>。</strong></p>
+        <p style="font-size:clamp(0.62rem,1.6vw,0.8rem);color:#6b5b55;">💡 你是CEO，他是你评估过的外部合作伙伴。</p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">06 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片8：行动指南 -->
+  <div class="card" data-i="7" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">07 · 行动指南</div>
+      <div class="t-main">三招<span class="hl">立规矩</span></div>
+      <div class="divider"></div>
+      <div class="body">
+        <p style="font-weight:700;font-size:clamp(0.78rem,2.2vw,1rem);color:#1a1a2e;">① 把「情绪对话」切回「工作对话」</p>
+        <div class="cmp">
+          <div class="cmp-l" style="font-size:clamp(0.6rem,1.5vw,0.75rem);">❌ 别回「别难过了」</div>
+          <div class="cmp-r" style="font-size:clamp(0.6rem,1.5vw,0.75rem);">✅ 回：「理解。你打算怎么处理？」</div>
+        </div>
+        <p style="font-weight:700;font-size:clamp(0.78rem,2.2vw,1rem);color:#1a1a2e;">② 设定时间边界</p>
+        <p style="font-size:clamp(0.62rem,1.6vw,0.8rem);color:#6b5b55;">他要聊 → 限定时间：「我5分钟后有会，长话短说。」<br>半夜发情绪消息 → 第二天再回。<br><strong>你不是他的24小时情绪热线。</strong></p>
+        <p style="font-weight:700;font-size:clamp(0.78rem,2.2vw,1rem);color:#1a1a2e;">③ 不主动承接他的情绪课题</p>
+        <p style="font-size:clamp(0.62rem,1.6vw,0.8rem);color:#6b5b55;">他抱怨 → 不要主动分析、建议、开药方。<br>否则——<strong class="wn">他只是在倒垃圾。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">07 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片9：关系定位 -->
+  <div class="card" data-i="8" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">08 · 关系定位</div>
+      <div class="t-main">把他放进<br><span class="hl">你的坐标系</span></div>
+      <div class="divider"></div>
+      <div class="body">
+        <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);color:#6b5b55;">用四象限定位你在职场里的每一段关系：</p>
+        <div class="quad">
+          <div class="qi"><div class="ql">高价值·低信任</div><div class="qs">争取合作</div></div>
+          <div class="qi"><div class="ql">高价值·高信任</div><div class="qs">深入协作</div></div>
+          <div class="qi"><div class="ql">低价值·低信任</div><div class="qs">保持距离</div></div>
+          <div class="qi"><div class="ql">低价值·高信任</div><div class="qs">维持礼貌</div></div>
+        </div>
+        <p>那个总在消耗你情绪、又没有实质贡献的人 → <strong class="wn">左下角，保持距离。</strong></p>
+        <p style="font-size:clamp(0.6rem,1.5vw,0.78rem);color:#6b5b55;">不需要撕破脸。只需要收回情绪供给，把他当普通同事。<br><strong>当你不供应情绪价值时，他的「脆弱」自然就不频繁了。</strong></p>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:8px;flex-shrink:0;">08 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 卡片10：结尾 -->
+  <div class="card ed" data-i="9" style="display:none">
+    <div class="card-inner">
+      <div class="card-num">09 · 结尾</div>
+      <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+        <div class="hbox" style="background:linear-gradient(135deg,#1a1a2e,#2d2040);border-left-color:#cc785c;padding:clamp(16px,4vw,32px);">
+          <p style="font-weight:700;color:#fcf9f5;line-height:1.5;text-align:center;margin-bottom:6px;font-size:clamp(0.95rem,3vw,1.4rem);">你不需要对任何人的情绪负责。</p>
+          <p style="font-weight:700;color:#e8a87c;line-height:1.5;text-align:center;font-size:clamp(0.95rem,3vw,1.4rem);">只对自己的成长负责。</p>
+        </div>
+        <div class="body" style="margin-top:8px;">
+          <p>最稀缺的资源从来不是钱，不是时间。<br><strong>是你的注意力。</strong></p>
+          <p>你花在分析他、担心他、安慰他的每一个小时——<br>都是从你的成长、你的项目、你的职业生涯里，偷走的。</p>
+          <p style="font-weight:700;margin-top:clamp(8px,2vw,16px);">
+            <span class="hl">你不是他的情绪疗愈师。</span><br>
+            <span class="hl">你是你自己的总经理。</span>
+          </p>
+        </div>
+      </div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;flex-shrink:0;">
+        <span class="tag-item">#女性成长</span>
+        <span class="tag-item">#职场清醒</span>
+        <span class="tag-item">#反PUA</span>
+        <span class="tag-item">#情绪价值</span>
+        <span class="tag-item">#人间清醒</span>
+        <span class="tag-item">#职场真相</span>
+        <span class="tag-item">#女生必看</span>
+        <span class="tag-item">#边界感</span>
+        <span class="tag-item">#拒绝精神内耗</span>
+      </div>
+      <div class="btm" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.5rem,1.2vw,0.65rem);letter-spacing:0.1em;color:#b8a89e;margin-top:6px;flex-shrink:0;">09 / 09</div>
+    </div>
+    <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+  </div>
+
+  <!-- 页码（半透明极小，悬浮） -->
+  <div class="pg" id="pg">1 / 10</div>
+
+  <!-- 底部迷你操作条 -->
+  <div class="mini-bar" id="miniBar">
+    <button onclick="prevC()">‹</button>
+    <span class="pi" id="pi">1/10</span>
+    <button onclick="nextC()">›</button>
+    <button class="dl" onclick="capC()">截图</button>
+  </div>
+
+</div>
+
+<script>
+  let cur=0,tot=10,hideTimer=null;
+
+  function showC(i){
+    document.querySelectorAll('.card').forEach((c,idx)=>{
+      c.style.display=idx===i?'flex':'none';
+    });
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+tot;
+    document.getElementById('pi').textContent=(i+1)+'/'+tot;
+    // 每次翻页闪烁一下bar
+    showBar();
+  }
+
+  function nextC(){if(cur<tot-1)showC(cur+1);}
+  function prevC(){if(cur>0)showC(cur-1);}
+
+  function showBar(){
+    const bar=document.getElementById('miniBar');
+    bar.classList.add('show');
+    clearTimeout(hideTimer);
+    hideTimer=setTimeout(()=>bar.classList.remove('show'),3000);
+  }
+
+  function capC(){
+    const card=document.querySelectorAll('.card')[cur];
+    // 克隆卡片，去掉touch-zones
+    const clone=card.cloneNode(true);
+    const zones=clone.querySelector('.touch-zones');
+    if(zones)zones.remove();
+    // 去掉页码
+    const pgs=clone.querySelectorAll('.btm');
+    pgs.forEach(p=>{if(p.textContent.trim().match(/^\d+\/\d+/))p.remove();});
+
+    const w=window.open('','','');
+    w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">');
+    w.document.write('<style>');
+    w.document.write(document.querySelector('style').innerHTML);
+    w.document.write('body{margin:0;background:#f3f0eb;display:flex;justify-content:center;align-items:center;min-height:100vh;}');
+    w.document.write('.card{width:100%;max-width:500px;aspect-ratio:3/4;box-shadow:none;border-radius:0;}');
+    w.document.write('.card::before{display:block;}');
+    w.document.write('.mini-bar,.pg,.touch-zones{display:none!important;}');
+    w.document.write('</style></head><body>');
+    w.document.write(clone.outerHTML);
+    w.document.write('</body></html>');
+    w.document.close();
+    w.focus();
+    // 延迟触发打印/截图
+    setTimeout(()=>{w.print();},300);
+  }
+
+  // 键盘
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')nextC();
+    if(e.key==='ArrowLeft')prevC();
+  });
+
+  // 触摸滑动
+  let sx=0;
+  document.querySelector('.card-wrap').addEventListener('touchstart',e=>{
+    sx=e.touches[0].clientX;
+  });
+  document.querySelector('.card-wrap').addEventListener('touchend',e=>{
+    const ex=e.changedTouches[0].clientX;
+    const dx=ex-sx;
+    if(dx>50)prevC();
+    else if(dx<-50)nextC();
+  });
+
+  // 点击卡片显示bar
+  document.querySelector('.card-wrap').addEventListener('click',showBar);
+</script>
+
 </body>
 </html>
