@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>无能领导PUA反制指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:#f3f0eb;font-family:'Noto Sans SC',system-ui,-apple-system,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;overscroll-behavior:none;}
+  .card-wrap{width:100%;max-width:500px;position:relative;margin:0 auto;}
+  .card{width:100%;aspect-ratio:3/4;background:#fcf9f5;position:relative;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 1px 20px rgba(0,0,0,0.06);}
+  .card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#cc785c,#e8a87c,#cc785c);z-index:2;}
+  .card-inner{padding:5% 6% 4%;flex:1;display:flex;flex-direction:column;position:relative;overflow-y:auto;}
+  .card-inner::-webkit-scrollbar{display:none;}
+  .card-num{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:clamp(0.55rem,1.2vw,0.7rem);letter-spacing:0.08em;color:#cc785c;margin-bottom:clamp(6px,1.5vw,12px);display:flex;align-items:center;gap:8px;flex-shrink:0;}
+  .card-num::after{content:'';flex:1;max-width:40px;height:2px;background:#cc785c;opacity:0.4;}
+  .t-main{font-weight:900;font-size:clamp(1.5rem,5.2vw,2.6rem);line-height:1.25;color:#1a1a2e;letter-spacing:-0.02em;margin-bottom:clamp(4px,1vw,10px);flex-shrink:0;}
+  .hl{color:#cc785c;}
+  .t-sub{font-weight:400;font-size:clamp(0.8rem,2.3vw,1.1rem);line-height:1.5;color:#6b5b55;margin-bottom:clamp(8px,2vw,18px);flex-shrink:0;}
+  .divider{width:clamp(28px,6vw,40px);height:3px;background:#cc785c;margin-bottom:clamp(10px,2.5vw,20px);border-radius:2px;flex-shrink:0;}
+  .body{font-weight:400;font-size:clamp(0.75rem,2.1vw,0.95rem);line-height:1.7;color:#3d3530;letter-spacing:0.01em;flex:1;display:flex;flex-direction:column;justify-content:center;gap:clamp(4px,1vw,8px);}
+  .body strong{font-weight:700;color:#1a1a2e;}
+  .body .em{color:#cc785c;font-weight:700;}
+  .body .wn{color:#c0392b;font-weight:700;}
+  .body p{margin:0;}
+  .hbox{background:linear-gradient(135deg,#fdf6f0,#f8ede6);border-left:3px solid #cc785c;padding:clamp(8px,2vw,14px) clamp(10px,2.5vw,18px);margin:clamp(4px,1vw,8px) 0;border-radius:0 6px 6px 0;flex-shrink:0;}
+  .hbox p{margin:0;}
+  .hbox-rd{background:#fef0ed;border-left-color:#c0392b;}
+  .hbox-gr{background:#f0f7e8;border-left-color:#2d7d3a;}
+  .tag-item{display:inline-block;background:#f5ede8;color:#6b5b55;padding:clamp(3px,0.8vw,6px) clamp(8px,2vw,14px);border-radius:14px;font-size:clamp(0.55rem,1.4vw,0.7rem);font-weight:500;}
+  .spacer{flex:1;min-height:4px;}
+  .btm{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(0.45rem,1.1vw,0.6rem);letter-spacing:0.1em;color:#b8a89e;margin-top:clamp(4px,1vw,8px);flex-shrink:0;}
+  .blist{list-style:none;padding:0;margin:clamp(4px,1vw,8px) 0;flex-shrink:0;}
+  .blist li{padding:clamp(3px,0.8vw,6px) 0 clamp(3px,0.8vw,6px) clamp(18px,4vw,24px);position:relative;line-height:1.55;font-size:clamp(0.68rem,1.9vw,0.85rem);}
+  .blist li::before{content:'';position:absolute;left:clamp(2px,0.5vw,4px);top:clamp(12px,2.5vw,16px);width:7px;height:7px;border-radius:50%;background:#cc785c;opacity:0.3;}
+  .blist li.dg::before{background:#c0392b;opacity:0.5;}
+  .blist li.gr::before{background:#2d7d3a;opacity:0.5;}
+
+  .cv{background:linear-gradient(145deg,#1a1a2e 0%,#2d2040 100%);}
+  .cv .card-inner{justify-content:center;align-items:center;text-align:center;}
+  .cv .t-main{color:#fcf9f5;font-size:clamp(1.7rem,6.2vw,3rem);}
+  .cv .t-main .hl{color:#e8a87c;}
+  .cv .t-sub{color:#b8a89e;}
+  .cv .divider{margin:clamp(8px,2vw,16px) auto;}
+  .cv .warn-badge{display:inline-block;background:rgba(204,120,92,0.15);border:1px solid rgba(204,120,92,0.3);color:#e8a87c;padding:clamp(5px,1.2vw,10px) clamp(14px,4vw,28px);border-radius:20px;font-size:clamp(0.7rem,1.8vw,0.9rem);font-weight:500;margin-top:clamp(6px,1.5vw,12px);}
+  .cv .card-num{color:#e8a87c;justify-content:center;}
+  .cv .card-num .dsh{opacity:0.5;color:#b8a89e;}
+  .cv .btm{text-align:center;color:#b8a89e;}
+
+  .pg{position:fixed;bottom:clamp(10px,3vw,24px);left:50%;transform:translateX(-50%);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:clamp(0.55rem,1.5vw,0.7rem);color:rgba(107,91,85,0.5);background:rgba(243,240,235,0.7);backdrop-filter:blur(4px);padding:clamp(3px,0.6vw,5px) clamp(10px,2.5vw,20px);border-radius:12px;z-index:10;pointer-events:none;user-select:none;transition:opacity 0.5s;}
+  .touch-zones{position:absolute;top:0;left:0;right:0;bottom:0;z-index:5;display:flex;pointer-events:none;}
+  .tz-left,.tz-right{flex:1;pointer-events:auto;cursor:pointer;}
+  .tz-left:active{background:linear-gradient(90deg,rgba(0,0,0,0.03),transparent);}
+  .tz-right:active{background:linear-gradient(270deg,rgba(0,0,0,0.03),transparent);}
+
+  .mini-bar{position:fixed;bottom:clamp(36px,9vw,54px);left:50%;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:clamp(10px,2.5vw,16px);background:rgba(26,26,46,0.65);backdrop-filter:blur(8px);padding:clamp(4px,1vw,8px) clamp(10px,2.5vw,16px);border-radius:20px;box-shadow:0 2px 12px rgba(0,0,0,0.1);opacity:0;transition:opacity 0.3s;pointer-events:none;}
+  .mini-bar.show{opacity:1;pointer-events:auto;}
+  .mini-bar button{background:none;border:none;color:#fcf9f5;font-size:clamp(0.65rem,1.7vw,0.8rem);cursor:pointer;padding:clamp(2px,0.5vw,4px) clamp(6px,1.5vw,10px);border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;transition:background 0.2s;white-space:nowrap;}
+  .mini-bar button:hover{background:rgba(204,120,92,0.3);}
+  .mini-bar .pi{color:rgba(255,255,255,0.5);font-size:clamp(0.5rem,1.3vw,0.65rem);font-weight:600;min-width:30px;text-align:center;user-select:none;}
+  .mini-bar .dl{background:#cc785c;color:#fff;border-radius:12px;font-size:clamp(0.5rem,1.3vw,0.6rem);padding:clamp(2px,0.5vw,5px) clamp(6px,1.5vw,12px);}
+  @media (hover:none){.mini-bar{opacity:1;pointer-events:auto;}}
+
+  .cmp{display:flex;gap:0;margin:clamp(3px,0.8vw,6px) 0;border-radius:6px;overflow:hidden;flex-shrink:0;}
+  .cmp-l{flex:1;background:#fef0ed;padding:clamp(5px,1.2vw,10px) clamp(6px,1.5vw,12px);color:#c0392b;font-weight:500;font-size:clamp(0.65rem,1.8vw,0.8rem);}
+  .cmp-r{flex:1;background:#f0f7e8;padding:clamp(5px,1.2vw,10px) clamp(6px,1.5vw,12px);color:#2d7d3a;font-weight:500;font-size:clamp(0.65rem,1.8vw,0.8rem);}
+</style>
+</head>
+<body>
+
+<div class="card-wrap" id="app">
+
+<!-- 卡1：封面 -->
+<div class="card cv" data-i="0">
+  <div class="card-inner">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;">
+      <div class="card-num"><span class="dsh">——</span> SERIES 02 <span class="dsh">——</span></div>
+      <div class="t-main">方案是你定的<br><span class="hl">锅是我背的</span></div>
+      <div class="divider"></div>
+      <div class="t-sub">无能领导PUA反制指南</div>
+      <div class="warn-badge">⚠️ 瞎指挥 · 甩锅 · 抢功</div>
+    </div>
+    <div class="btm">职场反PUA · 第二期</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡2：开篇 -->
+<div class="card" data-i="1" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">01 · 开篇</div>
+    <div class="t-main">你不是能力不行<br><span class="hl">你是遇到了无能领导</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>领导说：「这个方向你大胆去做。」</p>
+      <p>你加班做完了。汇报会上出事，他立刻说：<br>「这个方案我跟他们确认过，但执行出了偏差。」</p>
+      <p>方案是你做的？进度同步过？他说过可以？</p>
+      <p>——好像从来没发生过。</p>
+      <div class="hbox"><p style="font-weight:700;color:#c0392b;">这不是你的问题。是你遇到了一个无能但自保技能满级的领导。</p></div>
+    </div>
+    <div class="btm">01 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡3：瞎指挥 -->
+<div class="card" data-i="2" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">02 · 套路一</div>
+    <div class="t-main">「方向我定的<br><span class="hl">执行是你做的」</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>指令永远模糊：「你再想想」「还差点什么」</p>
+      <p>你追问，他说：「这个还要我教你？」</p>
+      <p>方向三天一变，出事了：「我当时可不是这个意思」</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 他不是在考验你，是在用你的时间替他的无能试错。</p></div>
+      <p style="font-weight:700;color:#2d7d3a;margin-top:4px;">✅ 反制：确认闭环法</p>
+      <p style="font-size:clamp(0.62rem,1.6vw,0.78rem);">模糊指令 → 书面化翻译 → 设截止期限 → 等确认</p>
+    </div>
+    <div class="btm">02 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡4：甩锅 -->
+<div class="card" data-i="3" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">03 · 套路二</div>
+    <div class="t-main">「功劳是我的<br><span class="hl">责任是你的」</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>出事第一时间群里@你：「这个环节你怎么做的？」</p>
+      <p>他说「放手去做」，你放手了，出事了他「没想到你会这么做」。</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 他不是在管理团队，是在管理自己的逃生通道。</p></div>
+      <p style="font-weight:700;color:#2d7d3a;">✅ 反制：留痕防御体系</p>
+      <ul class="blist">
+        <li class="gr">当面决策 → 补消息锁定</li>
+        <li class="gr">进度同步 → 抄送更多人</li>
+        <li class="gr">风险预警 → 文字留底</li>
+      </ul>
+    </div>
+    <div class="btm">03 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡5：抢功 -->
+<div class="card" data-i="4" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">04 · 套路三</div>
+    <div class="t-main">「你的方案很好<br><span class="hl">我帮你汇报了」</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p>你的方案他去开会，讲完变成「我的思考」。</p>
+      <p>你的名字在汇报材料里消失。</p>
+      <p>年终评优，他提了别人。</p>
+      <div class="hbox hbox-rd"><p style="font-weight:700;">🛑 他不是在抢功，是在用你的产出掩盖自己的空洞。</p></div>
+      <p style="font-weight:700;color:#2d7d3a;">✅ 反制三步：</p>
+      <ul class="blist">
+        <li class="gr">① 早期曝光 — 成果在大群同步</li>
+        <li class="gr">② 建立专业标签 — 成为公认最懂的人</li>
+        <li class="gr">③ 补充细节 — 拿回署名权</li>
+      </ul>
+    </div>
+    <div class="btm">04 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡6：深度拆解+核心心法 -->
+<div class="card" data-i="5" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">05 · 深度 + 核心</div>
+    <div class="t-main">他为什么这样？<br><span class="hl">你该怎么办？</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;font-size:clamp(0.7rem,1.8vw,0.85rem);">原因只有一个：能力不配位，靠PUA维持权威幻觉。</p>
+      <p style="font-size:clamp(0.65rem,1.6vw,0.78rem);color:#6b5b55;">他做不出该做的决策，扛不起该扛的责任。所以只能瞎指挥、甩锅、抢功。</p>
+      <div class="hbox" style="background:#1a1a2e;border-left-color:#cc785c;">
+        <p style="font-weight:700;color:#fcf9f5;font-size:clamp(0.72rem,2vw,0.9rem);">🎯 你的目标不是「让领导改」<br>是「不被他的无能拖下水」</p>
+      </div>
+      <p style="font-size:clamp(0.62rem,1.5vw,0.75rem);color:#6b5b55;">他瞎指挥了一辈子，不会因为你一次确认就变清楚。反制手段不是改造他，是当他出事时，你能干干净净站在旁边。</p>
+    </div>
+    <div class="btm">05 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡7：行动指南 -->
+<div class="card" data-i="6" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">06 · 行动指南</div>
+    <div class="t-main">四步<span class="hl">保命系统</span></div>
+    <div class="divider"></div>
+    <div class="body">
+      <p style="font-weight:700;">🔒 ① 凡事留痕</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">口头沟通→补文字确认。消息不删，截图归档。</p>
+      <p style="font-weight:700;">🔒 ② 向上确认闭环</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">模糊指令→翻译成清晰版本发回确认。确认了就绑在同一条船上。</p>
+      <p style="font-weight:700;">🔒 ③ 让更多人看到你的产出</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">阶段性成果、专业分享、大群同步。透明信息最难被扭曲。</p>
+      <p style="font-weight:700;">🔒 ④ 温和而坚定地防守</p>
+      <p style="font-size:clamp(0.6rem,1.5vw,0.75rem);color:#6b5b55;">锅飞来时说：「这个环节按X总在X会上确认的方向执行的。」</p>
+      <div class="hbox" style="margin-top:2px;"><p style="font-weight:700;">一句不带攻击性的陈述，比十句辩解都有力。</p></div>
+    </div>
+    <div class="btm">06 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<!-- 卡7: 结尾页面 -->
+<div class="card" data-i="7" style="display:none">
+  <div class="card-inner">
+    <div class="card-num">07 · 结尾</div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="hbox" style="background:linear-gradient(135deg,#1a1a2e,#2d2040);border-left-color:#cc785c;padding:clamp(16px,4vw,32px);">
+        <p style="font-weight:700;color:#fcf9f5;line-height:1.5;text-align:center;margin-bottom:6px;font-size:clamp(0.95rem,3vw,1.4rem);">你不欠任何领导一个完美的背锅姿势。</p>
+        <p style="font-weight:700;color:#e8a87c;line-height:1.5;text-align:center;font-size:clamp(0.95rem,3vw,1.4rem);">你只欠自己一个干净的职业生涯。</p>
+      </div>
+      <div class="body" style="margin-top:8px;">
+        <p>无能领导最大的武器从来不是权力。<br><strong>是你对他的恐惧。</strong></p>
+        <p>当你开始留痕、确认、同步、曝光的那一刻——<br>你就不在他的可控范围里了。</p>
+        <p style="font-weight:700;margin-top:clamp(8px,2vw,16px);">
+          <span class="hl">他瞎指挥，你就确认。</span><br>
+          <span class="hl">他甩锅，你就留痕。</span><br>
+          <span class="hl">他抢功，你就曝光。</span>
+        </p>
+      </div>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:clamp(4px,1vw,8px);flex-shrink:0;">
+      <span class="tag-item">#职场真相</span>
+      <span class="tag-item">#反PUA</span>
+      <span class="tag-item">#无能领导</span>
+      <span class="tag-item">#职场甩锅</span>
+      <span class="tag-item">#打工人</span>
+      <span class="tag-item">#向上管理</span>
+      <span class="tag-item">#职场清醒</span>
+      <span class="tag-item">#背锅侠</span>
+    </div>
+    <div class="btm">07 / 08</div>
+  </div>
+  <div class="touch-zones"><div class="tz-left" onclick="prevC()"></div><div class="tz-right" onclick="nextC()"></div></div>
+</div>
+
+<div class="pg" id="pg">1 / 8</div>
+<div class="mini-bar" id="miniBar">
+  <button onclick="prevC()">‹</button>
+  <span class="pi" id="pi">1/8</span>
+  <button onclick="nextC()">›</button>
+  <button class="dl" onclick="capC()">截图</button>
+</div>
+
+</div>
+
+<script>
+  let cur=0,tot=8,hideTimer=null;
+  function showC(i){
+    document.querySelectorAll('.card').forEach((c,idx)=>{c.style.display=idx===i?'flex':'none';});
+    cur=i;
+    document.getElementById('pg').textContent=(i+1)+' / '+tot;
+    document.getElementById('pi').textContent=(i+1)+'/'+tot;
+    showBar();
+  }
+  function nextC(){if(cur<tot-1)showC(cur+1);}
+  function prevC(){if(cur>0)showC(cur-1);}
+  function showBar(){const bar=document.getElementById('miniBar');bar.classList.add('show');clearTimeout(hideTimer);hideTimer=setTimeout(()=>bar.classList.remove('show'),3000);}
+  function capC(){
+    const card=document.querySelectorAll('.card')[cur];
+    const clone=card.cloneNode(true);
+    const zones=clone.querySelector('.touch-zones');if(zones)zones.remove();
+    const w=window.open('','','');w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">');
+    w.document.write('<style>');w.document.write(document.querySelector('style').innerHTML);
+    w.document.write('body{margin:0;background:#f3f0eb;display:flex;justify-content:center;align-items:center;min-height:100vh;}');
+    w.document.write('.card{width:100%;max-width:500px;aspect-ratio:3/4;box-shadow:none;border-radius:0;}');
+    w.document.write('.mini-bar,.pg,.touch-zones{display:none!important;}');
+    w.document.write('</style></head><body>');w.document.write(clone.outerHTML);w.document.write('</body></html>');
+    w.document.close();w.focus();setTimeout(()=>{w.print();},300);
+  }
+  document.addEventListener('keydown',e=>{if(e.key==='ArrowRight')nextC();if(e.key==='ArrowLeft')prevC();});
+  let sx=0;
+  document.querySelector('.card-wrap').addEventListener('touchstart',e=>{sx=e.touches[0].clientX;});
+  document.querySelector('.card-wrap').addEventListener('touchend',e=>{const ex=e.changedTouches[0].clientX;const dx=ex-sx;if(dx>50)prevC();else if(dx<-50)nextC();});
+  document.querySelector('.card-wrap').addEventListener('click',showBar);
+</script>
+</body>
+</html>
